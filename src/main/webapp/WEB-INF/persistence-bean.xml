@@ -1,0 +1,35 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver"/>
+    <property name="url" value="jdbc:jtds:sqlserver://NARENDRA/Practice"/>
+    <property name="username" value="sa"/>
+    <property name="password" value="Narendra"/>
+   </bean>
+
+  <context:component-scan base-package="dao"/>
+  
+  <!-- Configure Hibernate 4 Session Facotry -->
+      <bean id="sessionFactory"
+            class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+
+			<property name="dataSource">
+			  <ref bean="dataSource" />
+			</property>
+
+		
+			<property name="annotatedClasses">
+			<list>
+				  <value>bo.StudentBO</value> <!-- Entity classes-->
+			</list>
+			</property>
+
+      </bean>
+      
+ </beans>
